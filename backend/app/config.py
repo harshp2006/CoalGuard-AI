@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,6 +20,13 @@ class Settings(BaseSettings):
     supabase_anon_key: str
     supabase_service_role_key: str
     supabase_jwt_secret: str
+
+    # LLM / AI Configuration
+    llm_provider: str = "none"  # "none" | "openai" | "openai-compatible" | "anthropic" | "ollama"
+    llm_api_base: Optional[str] = None
+    llm_api_key: Optional[str] = None
+    llm_model: Optional[str] = None
+    llm_temperature: float = 0.3
 
     # CORS
     cors_origins: str = "http://localhost:5173"

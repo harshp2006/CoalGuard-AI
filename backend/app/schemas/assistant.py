@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 
 
@@ -9,7 +9,7 @@ class ChatMessage(BaseModel):
 
 class AssistantChatRequest(BaseModel):
     message: str
-    language: Optional[str] = "en"  # "en" | "hi" | "auto"
+    language: Optional[str] = "auto"  # "auto" | "en" | "hi"
     mine_id: Optional[str] = None
     conversation_history: Optional[List[ChatMessage]] = []
 
@@ -20,8 +20,9 @@ class QueryQuickAction(BaseModel):
     payload: str
 
 
-class AssistantChatResponse(BaseModel):
+class LLMResponse(BaseModel):
     reply: str
     language: str
-    data_context: Optional[dict[str, Any]] = None
+    data_context: Optional[Dict[str, Any]] = None
     quick_actions: Optional[List[QueryQuickAction]] = None
+    used_llm: bool = False
